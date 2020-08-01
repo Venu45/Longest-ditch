@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+    
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+    struct segment {
+        int start;
+        int end;
+        
+    };
+    int n;int i, j,k,max;
+    scanf("%d",&n);
+  struct segment a[n];
+    struct segment c[n];
+    int b[n];
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i].start);
+        scanf("%d",&a[i].end);
+    }
+    for(i=0;i<n;i++){
+        for(j=i+1;j<n;j++){
+            if(a[i].start>a[j].start){
+                k=a[i].start;
+                a[i].start=a[j].start;
+                a[j].start=k;
+              k=a[i].end;
+                a[i].end=a[j].end;
+                a[j].end=k;
+            }
+        }
+    }
+  /*  for(i=0;i<n;i++){
+        printf("%d",a[i].start);
+    }*/
+    for(i=0;i<n;i++){
+        c[i].start=a[i].start;
+        c[i].end=a[i].end;
+
+    }
+    max=0;
+    for(i=0;i<n-1;i++){
+        if(c[i+1].start<=(c[i].end)+1){
+            c[i+1].start=c[i].start;
+            if(c[i].end<=c[i+1].end){ 
+            c[i+1].end=c[i+1].end;
+            }
+            else{c[i+1].end=c[i].end;}
+        }
+    }
+    for(i=0;i<n;i++){
+        b[i]=c[i].end-c[i].start+1;       
+    }
+    for(int i=0;i<n;i++){
+        if(b[i]>max){max=b[i];}
+        }
+    
+   printf("%d",max); 
+    
+    return 0;
+}
